@@ -13,6 +13,16 @@
   <property name="windowTitle">
    <string>RemoteTC</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit{
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 4px;
+}
+QMainWindow{
+	background-color: white;
+}</string>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
