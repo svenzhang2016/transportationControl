@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resource/correct.png</file>
+        <file>resource/error.png</file>
+        <file>resource/logo.ico</file>
+        <file>resource/logo.png</file>
+    </qresource>
+</RCC>
