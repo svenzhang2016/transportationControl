@@ -20,6 +20,10 @@ Dialog::Dialog(QWidget *parent) :
     trayIcon->setToolTip("单击显示系统信息\n右击显示功能菜单");
     setBothIcons(0);
     trayIcon->setVisible(true);
+
+    // 初始化托盘图标菜单
+    setupTrayMenu();
+
 }
 
 Dialog::~Dialog()
@@ -75,6 +79,20 @@ void Dialog::setupTrayMenu()
     connect(quitAction, SIGNAL(triggered()),qApp, SLOT(quit()));
 
     trayIcon->setContextMenu(trayIconMenu); // 将tray图标设为菜单内容
+
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+            this, SLOT(myIconActivated(QSystemTrayIcon::ActivationReason)));
+}
+
+void Dialog::showMessage()
+{
+    QString title = "系统状态信息";
+    deviceInfo.append("1.aaa");
+    deviceInfo.append("2.bbb");
+    int duration =3;
+    trayIcon->showMessage(title,deviceInfo.join("\n"),
+                          QSystemTrayIcon::Information,
+                          duration * 1000);
 }
 
 void Dialog::closeEvent(QCloseEvent *event)
@@ -88,6 +106,18 @@ void Dialog::closeEvent(QCloseEvent *event)
             QMessageBox::information(this,tr("远程传输与控制系统"),
                                      tr("请登录。\n\n退出程序:请右击系统托盘图标，选择退出程序。"));
         }
-//        event->ignore();
+        event->ignore();
+    }
+}
+
+void Dialog::myIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason) {
+    case QSystemTrayIcon::Trigger:
+    case QSystemTrayIcon::DoubleClick:
+        showMessage();
+        break;
+    default:
+        break;
     }
 }
