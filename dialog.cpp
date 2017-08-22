@@ -24,6 +24,8 @@ Dialog::Dialog(QWidget *parent) :
     // 初始化托盘图标菜单
     setupTrayMenu();
 
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+            this, SLOT(myIconActivated(QSystemTrayIcon::ActivationReason)));
 }
 
 Dialog::~Dialog()
@@ -80,8 +82,6 @@ void Dialog::setupTrayMenu()
 
     trayIcon->setContextMenu(trayIconMenu); // 将tray图标设为菜单内容
 
-    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
-            this, SLOT(myIconActivated(QSystemTrayIcon::ActivationReason)));
 }
 
 void Dialog::showMessage()
