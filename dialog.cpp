@@ -55,7 +55,6 @@ void Dialog::logout()
     isLogin = false;
     showNormal();
 }
-
 void Dialog::setBothIcons(int index)
 {
     (index==0)?setWindowIcon(iconCorrect):setWindowIcon(iconError);
